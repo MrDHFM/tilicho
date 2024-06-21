@@ -54,13 +54,19 @@ const TableComponent = ({ initialData, statusOptionsProp ,statusStyles }) => {
     setCurrentPage(page);
   };
 
-    const menu = (
-        <Menu>
-          <Menu.Item key="1">Action 1</Menu.Item>
-          <Menu.Item key="2">Action 2</Menu.Item>
-          <Menu.Item key="3">Action 3</Menu.Item>
-        </Menu>
-      );
+  const getMenu = (record) => {
+    const actions = [];
+   
+    actions.push(<Menu.Item key="view">View</Menu.Item>);
+    if (record.status !== 'Archived') {
+      actions.push(<Menu.Item key="edit">Edit</Menu.Item>);
+    }
+    actions.push(<Menu.Item key="archive">{record.status === 'Archived' ? 'Unarchive' : 'Archive'}</Menu.Item>);
+    actions.push(<Menu.Item key="changelogs">Changelogs</Menu.Item>);
+   
+    
+    return <Menu>{actions}</Menu>;
+  };
     
       const tableColumns = [
         {
@@ -68,6 +74,7 @@ const TableComponent = ({ initialData, statusOptionsProp ,statusStyles }) => {
           dataIndex: 'campaignName',
           key: 'campaignName',
           fixed: 'left',
+          sorter: (a, b) => a.client.localeCompare(b.id),
           render: (text, record) => (
             <Space direction="vertical">
               <span style={{ fontWeight:"bold" }} >{text}</span>
@@ -121,9 +128,9 @@ const TableComponent = ({ initialData, statusOptionsProp ,statusStyles }) => {
         {
           title: 'Actions',
           key: 'actions',
-          render: () => (
-            <Dropdown overlay={menu} trigger={['click']}>
-              <MoreOutlined />
+          render: (text, record) => (
+            <Dropdown overlay={getMenu(record)} trigger={['click']}>
+              <Button icon={<MoreOutlined />} />
             </Dropdown>
           ),
         },
