@@ -129,8 +129,8 @@ const TableComponent = ({ initialData, statusOptionsProp ,statusStyles }) => {
           title: 'Actions',
           key: 'actions',
           render: (text, record) => (
-            <Dropdown overlay={getMenu(record)} trigger={['click']}>
-              <Button icon={<MoreOutlined />} />
+            <Dropdown  overlay={getMenu(record)} trigger={['click']}>
+              <Button icon={<MoreOutlined />} style={{ border:"none", background:"inherit" }} />
             </Dropdown>
           ),
         },
