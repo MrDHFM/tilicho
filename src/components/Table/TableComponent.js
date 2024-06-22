@@ -144,27 +144,7 @@ const TableComponent = ({ initialData, statusOptionsProp ,statusStyles }) => {
         return counts;
       }, [initialData, statusOptionsProp]);
 
-      const paginationProps = {
-        pageSize,
-        //showSizeChanger: true,
-        onShowSizeChange: handlePageSizeChange,
-        showTotal: (total, range) => (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Items per page: </span>
-            <Select
-              defaultValue={pageSize}
-              onChange={handlePageSizeChange}
-              style={{ marginLeft: 8 }}
-            >
-              {['10', '20', '50', '100'].map(size => (
-                <Select.Option key={size} value={parseInt(size)}>
-                  {size}
-                </Select.Option>
-              ))}
-            </Select>
-          </div>
-        ),
-      };
+     
 
       const paginatedData = filteredData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 

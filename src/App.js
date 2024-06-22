@@ -124,7 +124,7 @@ const initialData = [
     enable: true,
     id: '5GH5460311',
   },
-  // Add more data as needed
+   
 ];
 
 const statusStyles = {
